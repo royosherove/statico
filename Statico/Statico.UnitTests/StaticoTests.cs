@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Linq.Expressions;
-using System.Reflection;
 using NUnit.Framework;
-using NativeAssemblerInjection;
 
 namespace Statico.UnitTests
 {
@@ -22,12 +19,26 @@ namespace Statico.UnitTests
         private Person p = new Person();
         private Person p2 = new Person();
 
+        [TearDown]
+        public void teardown()
+        {
+            AllCalls.Reset();
+        }
         [Test]
         public void Fake_StaticWithInt_ReturnsFakeInt()
         {
             AllCalls.To(() => ClassWithStaticMethods.StaticMethodThatReturns1()).Will(()=> 2);
 
             Assert.AreEqual(2, ClassWithStaticMethods.StaticMethodThatReturns1());
+        }
+        
+        [Test]
+        public void Fake_StaticWithInt_CanThrow()
+        {
+            AllCalls.To(() => ClassWithStaticMethods.StaticMethodThatReturns1()).WillThrow(new Exception("fake"));
+
+            Assert.Throws<Exception>(()=>
+                ClassWithStaticMethods.StaticMethodThatReturns1() );
         }
         [Test]
         public void Fake_NonStatic_WorksOnFutures()
@@ -37,43 +48,6 @@ namespace Statico.UnitTests
             Assert.AreEqual(2, new Person().Return1());
             Assert.AreEqual(2, p.Return1());
             Assert.AreEqual(2, p2.Return1());
-        }
-    }
-
-    public class AllCalls
-    {
-        public static ReturnSpec To(Expression<Func<int>> thefunc )
-        {
-            var call = thefunc.Body as MethodCallExpression;
-            MethodBase theMethod = call.Method;
-            ReturnSpec rs = new ReturnSpec(theMethod);
-            return rs;
-        }
-    }
-
-    public class ReturnSpec
-    {
-        public readonly MethodBase _toReplace;
-        public MethodInfo replaement;
-
-        public void Dispose()
-        {
-        }
-        public ReturnSpec(MethodBase toReplace)
-        {
-            _toReplace = toReplace;
-        }
-
-        public void Will<T>(Func<T> action)
-        {
-            replaement = action.Method;
-            MethodUtil.ReplaceMethod(replaement,_toReplace);
-        }
-
-        public void Will<T>(Action<T> action)
-        {
-            replaement = action.Method;
-            MethodUtil.ReplaceMethod(replaement,_toReplace);
         }
     }
 

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statico.UnitTests", "Statico.UnitTests\Statico.UnitTests.csproj", "{FD83A50D-8A4B-414D-AA65-990E4C2BDD86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statico", "Statico\Statico.csproj", "{B09187FB-DC97-412F-A43E-CC84690E4F6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{FD83A50D-8A4B-414D-AA65-990E4C2BDD86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD83A50D-8A4B-414D-AA65-990E4C2BDD86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD83A50D-8A4B-414D-AA65-990E4C2BDD86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B09187FB-DC97-412F-A43E-CC84690E4F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B09187FB-DC97-412F-A43E-CC84690E4F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B09187FB-DC97-412F-A43E-CC84690E4F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B09187FB-DC97-412F-A43E-CC84690E4F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
